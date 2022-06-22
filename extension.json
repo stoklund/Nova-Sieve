@@ -2,7 +2,7 @@
     "identifier": "stoklund.Sieve",
     "name": "Sieve",
     "organization": "Jakob Stoklund Olesen",
-    "description": "Sieve mail filtering language.",
+    "description": "Sieve email filtering language.",
     "version": "1.0",
     "categories": ["languages"]
 }
