@@ -1,0 +1,8 @@
+{
+    "identifier": "stoklund.Sieve",
+    "name": "Sieve",
+    "organization": "Jakob Stoklund Olesen",
+    "description": "Lorem ipsum, dolor sit amet.",
+    "version": "1.0",
+    "categories": ["languages"]
+}
