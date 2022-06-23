@@ -61,10 +61,10 @@
     <collections>
         <!-- Comments -->
         <collection name="comments">
-        <scope name="sieve.comment.single" spell-check="true">
-            <expression>\#(.*)$</expression>
-            <capture number="1" name="sieve.comment.content" />
-        </scope>
+            <scope name="sieve.comment.single" spell-check="true">
+                <expression>\#(.*)$</expression>
+                <capture number="1" name="sieve.comment.content" />
+            </scope>
         </collection>
 
         <!-- Keywords -->
@@ -75,6 +75,9 @@
                     <string>elsif</string>
                     <string>if</string>
                     <string>require</string>
+                    <string>include</string>
+                    <string>return</string>
+                    <string>global</string>
                 </strings>
             </scope>
             <scope name="sieve.keyword.condition">
@@ -86,11 +89,31 @@
             </scope>
             <scope name="sieve.identifier.function">
                 <strings>
+                    <string>addflag</string>
+                    <string>addheader</string>
+                    <string>break</string>
+                    <string>convert</string>
+                    <string>debug_log</string>
+                    <string>deleteheader</string>
                     <string>discard</string>
+                    <string>enclose</string>
+                    <string>ereject</string>
+                    <string>execute</string>
+                    <string>extracttext</string>
                     <string>fileinto</string>
+                    <string>filter</string>
+                    <string>foreverypart</string>
                     <string>keep</string>
+                    <string>notify</string>
+                    <string>pipe</string>
                     <string>reject</string>
+                    <string>removeflag</string>
+                    <string>replace</string>
+                    <string>report</string>
+                    <string>set</string>
+                    <string>setflag</string>
                     <string>stop</string>
+                    <string>vacation</string>
                 </strings>
             </scope>
             <scope name="sieve.value.boolean">
@@ -112,19 +135,44 @@
                     <expression>&quot;</expression>
                 </ends-with>
                 <subscopes>
-                    <scope name="sieve.string.escape">
-                        <expression>\\.</expression>
-                    </scope>
+                    <include syntax="self" collection="string-escapes" />
+                </subscopes>
+            </scope>
+            <scope name="sieve.string.heredoc">
+                <starts-with>
+                    <expression>\b(text:)\s*$</expression>
+                    <capture number="1" name="sieve.keyword.construct" />
+                </starts-with>
+                <ends-with>
+                    <expression>^(\.)$</expression>
+                    <capture number="1" name="sieve.keyword.construct" />
+                </ends-with>
+                <subscopes>
+                    <include syntax="self" collection="string-escapes" />
                 </subscopes>
             </scope>
             <scope name="sieve.value.number">
                 <expression>\d+[kmgKMG]?</expression>
             </scope>
-            <scope name="sieve.tag.name">
+            <scope name="sieve.identifier.property">
                 <expression>[a-zA-Z]\w*</expression>
             </scope>
-            <scope name="sieve.tag.attribute.name">
-                <expression>:\w+</expression>
+            <scope name="sieve.identifier.argument">
+                <expression>(:)\w+</expression>
+                <capture number="1" name="sieve.identifier.argument.prefix" />
+            </scope>
+        </collection>
+        <collection name="string-escapes">
+            <scope name="sieve.string.escape">
+                <expression>\\.</expression>
+            </scope>
+            <scope name="sieve.string-template">
+                <starts-with>
+                    <expression>\$\{</expression>
+                </starts-with>
+                <ends-with>
+                    <expression>\}|$</expression>
+                </ends-with>
             </scope>
         </collection>
     </collections>
