@@ -47,23 +47,67 @@
     </surrounding-pairs>
 
     <scopes>
-        <include syntax="self" collection="comments" />
-        <include syntax="self" collection="keywords" />
-        <include syntax="self" collection="values" />
-        <scope name="sieve.bracket">
-            <expression>[{}\[\]()]</expression>
-        </scope>
-        <scope name="sieve.operator">
-            <expression>[;]</expression>
-        </scope>
+        <include syntax="self" collection="normal" />
     </scopes>
 
     <collections>
+        <!-- All normal scopes -->
+        <collection name="normal">
+            <include syntax="self" collection="comments" />
+            <include syntax="self" collection="keywords" />
+            <include syntax="self" collection="values" />
+            <include syntax="self" collection="blocks" />
+        </collection>
+
         <!-- Comments -->
         <collection name="comments">
             <scope name="sieve.comment.single" spell-check="true">
                 <expression>\#(.*)$</expression>
                 <capture number="1" name="sieve.comment.content" />
+            </scope>
+        </collection>
+
+        <collection name="blocks">
+            <scope name="sieve.block">
+                <symbol type="block">
+                    <context behavior="subtree" />
+                </symbol>
+                <starts-with>
+                    <expression>\{</expression>
+                    <capture number="0" name="sieve.bracket" />
+                </starts-with>
+                <ends-with>
+                    <expression>\}</expression>
+                    <capture number="0" name="sieve.bracket" />
+                </ends-with>
+                <subscopes>
+                    <include syntax="self" collection="normal" />
+                </subscopes>
+            </scope>
+
+            <scope name="sieve.string-list">
+                <symbol type="block">
+                    <context behavior="subtree" />
+                </symbol>
+                <starts-with>
+                    <expression>\[</expression>
+                    <capture number="0" name="sieve.bracket" />
+                </starts-with>
+                <ends-with>
+                    <expression>\]</expression>
+                    <capture number="0" name="sieve.bracket" />
+                </ends-with>
+                <subscopes>
+                    <include syntax="self" collection="comment" />
+                    <include syntax="self" collection="values" />
+                </subscopes>
+            </scope>
+
+            <scope name="sieve.bracket">
+                <expression>[()]</expression>
+            </scope>
+            <scope name="sieve.operator">
+                <expression>[;]</expression>
             </scope>
         </collection>
 
