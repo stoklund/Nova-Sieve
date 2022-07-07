@@ -1,7 +1,3 @@
-<!--
-🎈 Include a brief description of the features your syntax extension provides. For example:
--->
-
 **Sieve** provides syntax highlighting for the [*Sieve email filtering language*](https://datatracker.ietf.org/doc/html/rfc5228) which is used to define filtering rules in IMAP mail servers.
 
 ## Features
