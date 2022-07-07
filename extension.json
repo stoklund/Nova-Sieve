@@ -4,5 +4,7 @@
     "organization": "Jakob Stoklund Olesen",
     "description": "Sieve email filtering language.",
     "version": "1.0",
-    "categories": ["languages"]
+    "categories": ["languages"],
+    "repository": "https://github.com/stoklund/Nova-Sieve",
+    "bugs": "https://github.com/stoklund/Nova-Sieve/issues"
 }
